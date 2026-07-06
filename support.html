@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Support — Gawibawibo</title>
+<style>
+  :root {
+    --background: #D6E8D0;
+    --surface: #C4DDBC;
+    --surface-card: #E4F0E0;
+    --matcha-primary: #5C8A4E;
+    --matcha-dark: #3D6B30;
+    --matcha-light: #A8D49A;
+    --text-primary: #1A2E16;
+    --text-secondary: #4A6B42;
+    --text-light: #7A9B72;
+    --border: #9DC494;
+    --border-light: #B8D9B2;
+    --army-badge: #9B59B6;
+    --radius-lg: 24px;
+    --radius-xl: 32px;
+    --radius-full: 9999px;
+    --shadow-sm: 0 1px 4px rgba(26, 10, 46, 0.08);
+    --shadow-md: 0 4px 12px rgba(26, 10, 46, 0.12);
+    --shadow-lg: 0 8px 24px rgba(26, 10, 46, 0.16);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --background: #1A2E1A;
+      --surface: #233023;
+      --surface-card: #1F2E1F;
+      --matcha-primary: #6BAF5A;
+      --matcha-dark: #85C972;
+      --matcha-light: #4A7A40;
+      --text-primary: #E8F5E4;
+      --text-secondary: #9DC494;
+      --text-light: #6B9B62;
+      --border: #3A5A3A;
+      --border-light: #2E4A2E;
+      --army-badge: #BB8FCE;
+      --shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.4);
+      --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5);
+      --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.6);
+    }
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background: var(--background);
+    color: var(--text-primary);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .bg-shapes {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .bg-shape {
+    position: absolute;
+    width: 140px;
+    height: 140px;
+    opacity: 0.07;
+  }
+  @media (prefers-color-scheme: dark) {
+    .bg-shape { opacity: 0.05; }
+  }
+  .bg-shape.rock     { top: 60px;  left: -30px; transform: rotate(-12deg); font-size: 120px; }
+  .bg-shape.paper    { top: 420px; right: -30px; transform: rotate(8deg); font-size: 120px; }
+  .bg-shape.scissors { top: 900px; left: -20px; transform: rotate(-18deg); font-size: 120px; }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 56px 20px 80px;
+  }
+
+  /* Logo header — mirrors the sign-in screen */
+  .logo-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+  .logo-circle {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    background: var(--matcha-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-lg);
+    margin-bottom: 16px;
+    font-size: 40px;
+  }
+  .app-name {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin: 0 0 4px;
+  }
+  .tagline {
+    font-size: 14px;
+    color: var(--text-secondary);
+    letter-spacing: 2px;
+    margin: 0;
+  }
+
+  h1 {
+    font-size: 28px;
+    font-weight: 700;
+    text-align: center;
+    margin: 0 0 8px;
+    letter-spacing: -0.5px;
+  }
+  .subtitle {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 15px;
+    margin: 0 0 32px;
+    line-height: 1.6;
+  }
+
+  .card {
+    background: var(--surface-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+    padding: 28px;
+    margin-bottom: 24px;
+  }
+
+  .card-eyebrow {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    color: var(--matcha-primary);
+    text-transform: uppercase;
+    margin: 0 0 12px;
+  }
+
+  .email-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: var(--matcha-dark);
+    color: #FFFFFF;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    padding: 16px;
+    border-radius: var(--radius-full);
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .email-button:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+  }
+  .email-button:active { transform: translateY(0); }
+
+  .response-note {
+    text-align: center;
+    font-size: 13px;
+    color: var(--text-light);
+    margin: 14px 0 0;
+  }
+
+  .section-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 16px;
+    letter-spacing: -0.3px;
+  }
+
+  /* FAQ accordion */
+  .faq-item {
+    border-bottom: 1px solid var(--border-light);
+  }
+  .faq-item:last-child { border-bottom: none; }
+
+  .faq-question {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    background: none;
+    border: none;
+    padding: 18px 0;
+    text-align: left;
+    font-family: inherit;
+    font-size: 15.5px;
+    font-weight: 600;
+    color: var(--text-primary);
+    cursor: pointer;
+  }
+
+  .faq-chevron {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    color: var(--matcha-primary);
+    transition: transform 0.25s ease;
+  }
+  .faq-item.open .faq-chevron { transform: rotate(180deg); }
+
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+  }
+  .faq-item.open .faq-answer {
+    max-height: 400px;
+    padding-bottom: 18px;
+  }
+  .faq-answer p {
+    margin: 0;
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: var(--text-secondary);
+  }
+  .faq-answer strong { color: var(--text-primary); }
+
+  .badge-inline {
+    display: inline-block;
+    background: var(--army-badge);
+    color: #FFFFFF;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: var(--radius-full);
+    margin: 0 2px;
+  }
+
+  /* App info footer */
+  .app-info {
+    text-align: center;
+    padding-top: 8px;
+  }
+  .app-info-row {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text-light);
+    margin-bottom: 16px;
+  }
+  .app-info-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  .app-info-links a {
+    color: var(--matcha-primary);
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .app-info-links a:hover { text-decoration: underline; }
+
+  @media (max-width: 420px) {
+    .card { padding: 22px; }
+    h1 { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="bg-shapes" aria-hidden="true">
+    <div class="bg-shape rock">🪨</div>
+    <div class="bg-shape paper">📄</div>
+    <div class="bg-shape scissors">✂️</div>
+  </div>
+
+  <div class="container">
+
+    <div class="logo-area">
+      <div class="logo-circle">🪨</div>
+      <p class="app-name">Gawibawibo</p>
+      <p class="tagline">가위바위보</p>
+    </div>
+
+    <h1>Contact Us</h1>
+    <p class="subtitle">Having an issue or need help? Reach out and we'll get back to you within 24 hours.</p>
+
+    <div class="card">
+      <p class="card-eyebrow">Email Support</p>
+      <a class="email-button" href="mailto:support@gawibawibo.app">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z" opacity="0"/><path d="M22 6l-10 7L2 6"/><path d="M2 6h20v12H2z"/></svg>
+        support@gawibawibo.app
+      </a>
+      <p class="response-note">We respond within 24 hours on business days.</p>
+    </div>
+
+    <div class="card">
+      <p class="section-title" style="margin-bottom: 4px;">Frequently Asked Questions</p>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          How do I sign in?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Tap <strong>"Continue with Google"</strong> or <strong>"Continue with Apple"</strong> on the sign in screen. There's also a <strong>"Tap to play"</strong> option if you'd rather jump in as a guest first, you can always sign in properly later to save your progress and appear on the leaderboard.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          How does matchmaking work?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Tap <strong>Play</strong> to enter matchmaking. You'll be paired with a real opponent within seconds. If nobody's around, a bot steps in so you're never stuck waiting, matches are best of 3 rounds either way.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          What is the leaderboard and how do I climb it?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="faq-answer">
+          <p>The leaderboard ranks the Top 100 players by PvP wins. Every match you win against a real opponent counts toward your rank, so the more you play and win, the higher you climb.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          What is the ARMY badge and purple theme?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Head to your profile settings and join <span class="badge-inline">ARMY</span> to unlock a purple color theme across the app and show off the badge next to your name on the leaderboard.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          How do I submit fan art?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Open the Fan Art tab and upload your artwork from your photo library. Submissions go through a quick review before appearing in the public gallery for everyone to see.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          My progress didn't carry over to a new device. What do I do?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Make sure you're signed in with the same Google or Apple account you used before, your progress is tied to that account and syncs automatically once you sign in. If you played as a guest, your progress stays on that one device only.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          How do I delete my account?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Email us at <strong>support@gawibawibo.app</strong> with the subject line "Delete my account" from the email address linked to your account. We'll confirm and process the deletion within 30 days.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          The app crashed or something isn't working.
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Try force closing the app and reopening it first. If it keeps happening, email us at <strong>support@gawibawibo.app</strong> with your device model, iOS or Android version, and what you were doing when it happened.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="app-info">
+      <div class="app-info-row">
+        <span>Version 1.0</span>
+        <span>·</span>
+        <span>iOS &amp; Android</span>
+        <span>·</span>
+        <span>Free</span>
+      </div>
+      <div class="app-info-links">
+        <a href="https://sirclenetworking.github.io/Gawibawibo-legal/privacy-policy.html">Privacy Policy</a>
+        <a href="https://sirclenetworking.github.io/Gawibawibo-legal/terms-of-service.html">Terms of Service</a>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function toggleFaq(button) {
+      const item = button.parentElement;
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    }
+  </script>
+
+</body>
+</html>
